@@ -8,32 +8,33 @@ value(1..n).
 field(f(X,Y)) :- xcoo(X), ycoo(Y).
 
 
-cage(c1,"+",4).
+cage(c1,"-",1).
 
 in(c1,f(1,1)).
 in(c1,f(1,2)).
 
-%cagesum(C,S) :- S = #sum{in(C,f(X,Y)):cage(C)}.
+cage(c2,"+",4).
 
-cagesum(P, S) :- S = #sum{V:in(P,I), text(I,V)}, cage( P,"+",R ).
+in(c2,f(2,1)).
+in(c2,f(2,2)).
+
+cage(c3,"/",1).
+
+in(c3,f(3,3)).
+in(c3,f(3,1)).
+
+
+cagesum(P,S) :- S = #sum{V:in(P,I), text(I,V)}, cage( P,"+",R ).
+
+cageminus(P,S) :- S=V-VV, in(P,I),text(I,V),in(P,II), text(II,VV), cage( P,"-",R ), I!=II, S>0.
+
+cagediv(P,S) :- S=V/VV, in(P,I),text(I,V),in(P,II), text(II,VV), cage( P,"/",R ), I!=II, S>0.
 
 :- cagesum(P,S), cage(P,"+",R), S!=R.
-%% cagesum(P, S) :- S = #sum{ V,field(I,V) : in(P,I)},cage(P,"+",S).
+:- cageminus(P,S), cage(P,"-",R), S!=R.
+:- cagediv(P,S), cage(P,"/",R), S!=R.
 
-
-%sudoku(X,Y,V) :- initial(X,Y,V).
-%initial(1,2,3).
-
-% For every value X and Y that don't describe a cell that is initially filled out, 
-% choose one value V and generate fact sudoku(X,Y,V)
-%1 { sudoku(X,Y,V) : value(V) } 1 :- value(X), value(Y), not initial(X,Y,_).
-
-% Each row may only contain the same value once
+% One number can only appear once in a row
 :- text(f(X,Y),V), text(f(XX,Y),V), X != XX.
-% Each column may only contain the same value once
+% One number can only appear once in a column
 :- text(f(X,Y),V), text(f(X,YY),V), Y != YY.
-
-
-
-
-% #show sudoku/3.
