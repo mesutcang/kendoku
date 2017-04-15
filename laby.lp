@@ -21,7 +21,12 @@ in(c2,f(2,2)).
 cage(c3,"/",1).
 
 in(c3,f(3,3)).
-in(c3,f(3,1)).
+in(c3,f(3,2)).
+
+cage(c4,"*",2).
+
+in(c4,f(3,1)).
+in(c4,f(3,2)).
 
 
 cagesum(P,S) :- S = #sum{V:in(P,I), text(I,V)}, cage( P,"+",R ).
@@ -30,9 +35,12 @@ cageminus(P,S) :- S=V-VV, in(P,I),text(I,V),in(P,II), text(II,VV), cage( P,"-",R
 
 cagediv(P,S) :- S=V/VV, in(P,I),text(I,V),in(P,II), text(II,VV), cage( P,"/",R ), I!=II, S>0.
 
+cageproduct(P,S) :- S=V*VV, in(P,I),text(I,V),in(P,II), text(II,VV), cage( P,"*",R ), I!=II, S>0.
+
 :- cagesum(P,S), cage(P,"+",R), S!=R.
 :- cageminus(P,S), cage(P,"-",R), S!=R.
 :- cagediv(P,S), cage(P,"/",R), S!=R.
+:- cageproduct(P,S), cage(P,"*",R), S!=R.
 
 % One number can only appear once in a row
 :- text(f(X,Y),V), text(f(XX,Y),V), X != XX.
