@@ -13,10 +13,11 @@ cage(c1,"-",1).
 in(c1,f(1,1)).
 in(c1,f(1,2)).
 
-cage(c2,"+",4).
+cage(c2,"+",7).
 
 in(c2,f(2,1)).
 in(c2,f(2,2)).
+in(c2,f(1,2)).
 
 cage(c3,"/",1).
 
@@ -29,7 +30,7 @@ in(c4,f(3,1)).
 in(c4,f(3,2)).
 
 
-cagesum(P,S) :- S = #sum{V:in(P,I), text(I,V)}, cage( P,"+",R ).
+cagesum(P,S) :- S = #sum{V,I:in(P,I), text(I,V)}, cage( P,"+",R ).
 
 cageminus(P,S) :- S=V-VV, in(P,I),text(I,V),in(P,II), text(II,VV), cage( P,"-",R ), I!=II, S>0.
 
