@@ -1,4 +1,4 @@
-#const n = 3. % Max-Value
+#const n = 9. % Max-Value
 
 xcoo(1..n).
 ycoo(1..n).
@@ -12,6 +12,8 @@ cage(c1,"-",1).
 
 in(c1,f(1,1)).
 in(c1,f(1,2)).
+sign(f(1,1),"-").
+color(f(1,1),"#FF0000").
 
 cage(c2,"+",7).
 
