@@ -164,7 +164,7 @@ class Window:
       self.items.append( self.canvas.create_rectangle( * fieldRect(x,y), fill=WALL_FILL) )
     for (x, y, sign) in ext['sign']:
       fr = fieldRect(x,y)
-      self.items.append( self.canvas.create_text( (fr[0]+fr[2])/2, (fr[1]+fr[3])/2, anchor=tk.SE, text=str(sign), fill=WALL_FILL) )
+      self.items.append( self.canvas.create_text( (fr[0]+fr[2])/2, (fr[1]+fr[3])/2, anchor=tk.SE, text=str(sign), fill=WALL_FILL, font=("Courier", 33)) )
     for (x, y) in ext['mark']:
       self.items.append( self.canvas.create_oval( *fieldRect(x,y,10), fill=MARK_FILL) )
     for (x, y, text) in ext['text']:
